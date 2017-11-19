@@ -49,8 +49,7 @@ public class WebDriverTests {
         chromeDriver.quit();
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu1p(){
         login(EMAIL, PASSWORD);
         
@@ -61,8 +60,7 @@ public class WebDriverTests {
         assertEquals(homeUrl, chromeDriver.getCurrentUrl());
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu1a1(){
         login(EMAIL, "");
         
@@ -71,8 +69,7 @@ public class WebDriverTests {
         assertEquals("Campo Requerido.", element.getText());
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu1a2(){
         login(EMAIL, "1234567");
         
@@ -84,8 +81,7 @@ public class WebDriverTests {
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu1a3(){
         login("ts03.admin.com", PASSWORD);
         
@@ -94,8 +90,7 @@ public class WebDriverTests {
         assertEquals("Insira Email válido", element.getText());
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu2P(){
         login(EMAIL, PASSWORD);
         
@@ -104,100 +99,99 @@ public class WebDriverTests {
         //Verificando barra superior
         assertEquals(
                 "Minha Conta", 
-                getTextFromElement("//*[@id=\"user-nav\"]/ul/li[1]/a/span")
+                getTextFromElement(By.xpath("//*[@id=\"user-nav\"]/ul/li[1]/a/span"))
         );
         
         assertEquals(
                 "Sair do Sistema", 
-                getTextFromElement("//*[@id=\"user-nav\"]/ul/li[2]/a/span")
+                getTextFromElement(By.xpath("//*[@id=\"user-nav\"]/ul/li[2]/a/span"))
         );
         
-        assertTrue(getTextFromElement("//*[@id=\"user-nav\"]/ul/li[3]/a/span").contains("Versão:"));
+        assertTrue(getTextFromElement(By.xpath("//*[@id=\"user-nav\"]/ul/li[3]/a/span")).contains("Versão:"));
         
         //Verificando barra lateral
         assertEquals(
                 "Clientes", 
-                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[2]/a/span")
+                getTextFromElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[2]/a/span"))
         );
         
         assertEquals(
                 "Produtos", 
-                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[3]/a/span")
+                getTextFromElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[3]/a/span"))
         );
         
         assertEquals(
                 "Serviços", 
-                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[4]/a/span")
+                getTextFromElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[4]/a/span"))
         );
         
         assertEquals(
                 "Ordens de Serviço", 
-                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[5]/a/span")
+                getTextFromElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[5]/a/span"))
         );
         
         assertEquals(
                 "Vendas", 
-                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[6]/a/span")
+                getTextFromElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[6]/a/span"))
         );
         
         assertEquals(
                 "Arquivos", 
-                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[7]/a/span")
+                getTextFromElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[7]/a/span"))
         );
         
         assertEquals(
                 "Financeiro", 
-                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[8]/a/span[1]")
+                getTextFromElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[8]/a/span[1]"))
         );
         
         assertEquals(
                 "Relatórios", 
-                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[9]/a/span[1]")
+                getTextFromElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[9]/a/span[1]"))
         );
         
         assertEquals(
                 "Configurações", 
-                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[10]/a/span[1]")
+                getTextFromElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[10]/a/span[1]"))
         );
         
         //Verificação da parte superior central
         assertEquals(
                 "Clientes", 
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[1]/a")
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[1]/a"))
         );
         
         assertEquals(
                 "Produtos", 
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[2]/a")
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[2]/a"))
         );
         
         assertEquals(
                 "Serviços", 
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[3]/a")
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[3]/a"))
         );
         
         assertEquals(
                 "OS", 
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[4]/a")
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[4]/a"))
         );
         
         assertEquals(
                 "Vendas", 
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[5]/a")
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[5]/a"))
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu3P(){
         access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
         assertEquals("Adicionar Cliente",
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/a")
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/a"))
         );
         
         assertEquals("Próxima",
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[2]/ul/li[4]/a")
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[2]/ul/li[4]/a"))
         );
         
         assertTrue(find(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table")) != null);
@@ -205,38 +199,37 @@ public class WebDriverTests {
         String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr";
         
         assertEquals("#", 
-                getTextFromElement(row+"/th[1]")
+                getTextFromElement(By.xpath(row+"/th[1]"))
         );
         
         assertEquals("Nome", 
-                getTextFromElement(row+"/th[2]")
+                getTextFromElement(By.xpath(row+"/th[2]"))
         );
         
         assertEquals("CPF/CNPJ", 
-                getTextFromElement(row+"/th[3]")
+                getTextFromElement(By.xpath(row+"/th[3]"))
         );
         
         assertEquals("Telefone", 
-                getTextFromElement(row+"/th[4]")
+                getTextFromElement(By.xpath(row+"/th[4]"))
         );
         
         row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]";
         
         assertEquals("icon-eye-open",
-                getAttributeFromElement(row+"/a[1]/i", "class")
+                getAttributeFromElement(By.xpath(row+"/a[1]/i"), "class")
         );
         
         assertEquals("icon-pencil icon-white",
-                getAttributeFromElement(row+"/a[2]/i", "class")
+                getAttributeFromElement(By.xpath(row+"/a[2]/i"), "class")
         );
         
         assertEquals("icon-remove icon-white",
-                getAttributeFromElement(row+"/a[3]/i", "class")
+                getAttributeFromElement(By.xpath(row+"/a[3]/i"), "class")
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu3a1(){
         access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
@@ -259,7 +252,7 @@ public class WebDriverTests {
         assertTrue(section != null);
         
         assertEquals(columns.get("nome"),
-                getTextFromElement("//*[@id=\"collapseGOne\"]/div/table/tbody/tr[1]/td[2]")
+                getTextFromElement(By.xpath("//*[@id=\"collapseGOne\"]/div/table/tbody/tr[1]/td[2]"))
         );
         
         //Verificando a seção Contatos
@@ -271,7 +264,7 @@ public class WebDriverTests {
         waitFor("//*[@id=\"collapseGTwo\"]/div/table/tbody");
         
         assertEquals(columns.get("telefone"),
-                getTextFromElement("//*[@id=\"collapseGTwo\"]/div/table/tbody/tr[1]/td[2]")
+                getTextFromElement(By.xpath("//*[@id=\"collapseGTwo\"]/div/table/tbody/tr[1]/td[2]"))
         );
         
         //Verificando a seção Endereço
@@ -293,8 +286,7 @@ public class WebDriverTests {
         assertTrue(find(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div[1]/ul/div/a")) != null);
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu3a3(){
         access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
@@ -312,7 +304,7 @@ public class WebDriverTests {
         
         waitFor("//*[@id=\"breadcrumb\"]/a[3]");
         
-        assertTrue(getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]").contains("Cliente excluido com sucesso!"));
+        assertTrue(getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]")).contains("Cliente excluido com sucesso!"));
         
         row = "//*[@id=\"content\"]/div[2]/div/div/div[2]/div[2]/table/tbody/tr[1]";
         
@@ -321,8 +313,7 @@ public class WebDriverTests {
         assertNotEquals(deletedColumns.get("numero"), columns.get("numero"));
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu4P(){
         addClient("p");
         
@@ -331,8 +322,7 @@ public class WebDriverTests {
         assertTrue(success.getText().contains("Cliente adicionado com sucesso!"));
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu4a1(){
         addClient("a1");
         
@@ -340,12 +330,11 @@ public class WebDriverTests {
         
         assertEquals(
                 "Campo Requerido.",
-                getTextFromElement("//*[@id=\"formCliente\"]/div[5]/div/span")
+                getTextFromElement(By.xpath("//*[@id=\"formCliente\"]/div[5]/div/span"))
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu4a2(){
         addClient("a2");
         
@@ -353,12 +342,11 @@ public class WebDriverTests {
         
         assertEquals(
                 "The Email field must contain a valid email address.",
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p")
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p"))
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu4a3(){
         addClient("a3");
         
@@ -367,12 +355,11 @@ public class WebDriverTests {
         //Falha. Campo permite letras.
         assertEquals(
                 "The CPF/CNPJ field must contain a numeric value.",
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p")
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p"))
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu4a4(){
         access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
@@ -392,13 +379,12 @@ public class WebDriverTests {
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu5P(){
         access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
         String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
-        String number = getTextFromElement(row+"/td[1]");
+        String number = getTextFromElement(By.xpath(row+"/td[1]"));
         
         click("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]");
         
@@ -423,17 +409,16 @@ public class WebDriverTests {
         
         waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
         
-        assertEquals(number, getTextFromElement(row+"/td[1]"));
-        assertEquals(newName, getTextFromElement(row+"/td[2]"));
+        assertEquals(number, getTextFromElement(By.xpath(row+"/td[1]")));
+        assertEquals(newName, getTextFromElement(By.xpath(row+"/td[2]")));
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu5a1(){
         access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
         String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
-        String number = getTextFromElement(row+"/td[1]");
+        String number = getTextFromElement(By.xpath(row+"/td[1]"));
         
         click("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]");
         
@@ -445,16 +430,15 @@ public class WebDriverTests {
         scrollTo(button);
         button.click();
         
-        assertEquals("Campo Requerido.", getTextFromElement("//*[@id=\"formCliente\"]/div[1]/div/span"));
+        assertEquals("Campo Requerido.", getTextFromElement(By.xpath("//*[@id=\"formCliente\"]/div[1]/div/span")));
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu5a2(){
         access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
         String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
-        String number = getTextFromElement(row+"/td[1]");
+        String number = getTextFromElement(By.xpath(row+"/td[1]"));
         
         click("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]");
         
@@ -473,16 +457,15 @@ public class WebDriverTests {
         
         waitFor(error);
         
-        assertTrue(getTextFromElement(error+"/div/p").contains("The Email field must contain a valid email address."));
+        assertTrue(getTextFromElement(By.xpath(error+"/div/p")).contains("The Email field must contain a valid email address."));
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu5a3(){
         access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
         String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
-        String number = getTextFromElement(row+"/td[1]");
+        String number = getTextFromElement(By.xpath(row+"/td[1]"));
         
         click("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]");
         
@@ -501,12 +484,11 @@ public class WebDriverTests {
         //Falha. Campo permite letras.
         assertEquals(
                 "The CPF/CNPJ field must contain a numeric value.",
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p")
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p"))
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu5a4(){
         access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
@@ -525,8 +507,7 @@ public class WebDriverTests {
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu6P(){
         access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
@@ -538,27 +519,26 @@ public class WebDriverTests {
         
         String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr";
         
-        assertEquals("Nome", getTextFromElement(row+"/th[2]"));
-        assertEquals("Estoque", getTextFromElement(row+"/th[3]"));
-        assertEquals("Preço", getTextFromElement(row+"/th[4]"));
+        assertEquals("Nome", getTextFromElement(By.xpath(row+"/th[2]")));
+        assertEquals("Estoque", getTextFromElement(By.xpath(row+"/th[3]")));
+        assertEquals("Preço", getTextFromElement(By.xpath(row+"/th[4]")));
         
         row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]";
         
         assertEquals("icon-eye-open",
-                getAttributeFromElement(row+"/a[1]/i", "class")
+                getAttributeFromElement(By.xpath(row+"/a[1]/i"), "class")
         );
         
         assertEquals("icon-pencil icon-white",
-                getAttributeFromElement(row+"/a[2]/i", "class")
+                getAttributeFromElement(By.xpath(row+"/a[2]/i"), "class")
         );
         
         assertEquals("icon-remove icon-white",
-                getAttributeFromElement(row+"/a[3]/i", "class")
+                getAttributeFromElement(By.xpath(row+"/a[3]/i"), "class")
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu6a1(){
         access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
@@ -572,15 +552,15 @@ public class WebDriverTests {
         
         String table = "//*[@id=\"collapse-group\"]/div/div[2]/div/table/tbody";
         
-        assertEquals("Descrição", getTextFromElement(table+"/tr[1]/td[1]"));
-        assertEquals(columns.get("nome"), getTextFromElement(table+"/tr[1]/td[2]"));
-        assertEquals("Unidade", getTextFromElement(table+"/tr[2]/td[1]"));        
-        assertEquals("Preço de Compra", getTextFromElement(table+"/tr[3]/td[1]"));
-        assertEquals("Preço de Venda", getTextFromElement(table+"/tr[4]/td[1]"));
-        assertTrue(getTextFromElement(table+"/tr[4]/td[2]").contains(columns.get("preco")));
-        assertEquals("Estoque", getTextFromElement(table+"/tr[5]/td[1]"));
-        assertEquals(columns.get("estoque"), getTextFromElement(table+"/tr[5]/td[2]"));
-        assertEquals("Estoque Mínimo", getTextFromElement(table+"/tr[6]/td[1]"));
+        assertEquals("Descrição", getTextFromElement(By.xpath(table+"/tr[1]/td[1]")));
+        assertEquals(columns.get("nome"), getTextFromElement(By.xpath(table+"/tr[1]/td[2]")));
+        assertEquals("Unidade", getTextFromElement(By.xpath(table+"/tr[2]/td[1]")));        
+        assertEquals("Preço de Compra", getTextFromElement(By.xpath(table+"/tr[3]/td[1]")));
+        assertEquals("Preço de Venda", getTextFromElement(By.xpath(table+"/tr[4]/td[1]")));
+        assertTrue(getTextFromElement(By.xpath(table+"/tr[4]/td[2]")).contains(columns.get("preco")));
+        assertEquals("Estoque", getTextFromElement(By.xpath(table+"/tr[5]/td[1]")));
+        assertEquals(columns.get("estoque"), getTextFromElement(By.xpath(table+"/tr[5]/td[2]")));
+        assertEquals("Estoque Mínimo", getTextFromElement(By.xpath(table+"/tr[6]/td[1]")));
         
         //Não vai passar, botão "voltar" não existe.
         WebElement back = find(By.xpath("//*[@id=\"collapse-group\"]/div/div[12]/div/div/a"));
@@ -593,8 +573,7 @@ public class WebDriverTests {
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu6a3(){
         access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
@@ -621,8 +600,7 @@ public class WebDriverTests {
         assertNotEquals(newColumns.get("numero"), columns.get("numero"));
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu7P(){
         access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
@@ -645,8 +623,7 @@ public class WebDriverTests {
         assertTrue(success.getText().contains("Produto adicionado com sucesso!"));
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu7a1(){
         access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
@@ -668,8 +645,7 @@ public class WebDriverTests {
         assertEquals("Campo Requerido.", error.getText());
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu7a2(){
         access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
@@ -692,12 +668,11 @@ public class WebDriverTests {
         //Falha. Campo permite letras.
         assertEquals(
                 "The Estoque field must contain a numeric value.",
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p")
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p"))
         );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu7a3(){
         access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
@@ -717,28 +692,116 @@ public class WebDriverTests {
         );
     }
     
-    @Test
-    @Ignore
-    public void cdu8P(){
+    @Test    public void cdu8P(){
+        access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
+        
+        Map<String, String> columns = getProductInfo(row);
+        
+        click(row+"/td[5]/a[2]/i");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        assertEquals(columns.get("nome"), getAttributeFromElement(By.id("descricao"), "value"));
+        assertTrue(getAttributeFromElement(By.id("precoVenda"), "value").contains(columns.get("preco")));
+        assertEquals(columns.get("estoque"), getAttributeFromElement(By.id("estoque"), "value"));
+        
+        find(By.id("descricao")).clear();
+        find(By.id("descricao")).sendKeys("Produto Alterado");
+        
+        WebElement button = waitFor("//*[@id=\"formProduto\"]/div[7]/div/div/button");
+        scrollTo(button);
+        button.click();
+        
+        WebElement success = waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        assertTrue(success.getText().contains("Produto editado com sucesso!"));
+        
+        chromeDriver.get("https://testesoftwarecanoas.000webhostapp.com/mapos/index.php/produtos");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
+        
+        assertEquals(columns.get("numero"), getTextFromElement(By.xpath(row+"/td[1]")));
+        assertEquals("Produto Alterado", getTextFromElement(By.xpath(row+"/td[2]")));
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu8a1(){
+        access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
+        
+        Map<String, String> columns = getProductInfo(row);
+        
+        click(row+"/td[5]/a[2]/i");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        find(By.id("precoVenda")).clear();
+        
+        click("//*[@id=\"formProduto\"]/div[7]/div/div/button");
+        
+        WebElement error = waitFor("//*[@id=\"formProduto\"]/div[4]/div/span");
+        
+        assertEquals("Campo Requerido.", error.getText());
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu8a2(){
+        access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
+        
+        Map<String, String> columns = getProductInfo(row);
+        
+        click(row+"/td[5]/a[2]/i");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        find(By.id("estoque")).clear();
+        find(By.id("estoque")).sendKeys("AAA");
+        
+        click("//*[@id=\"formProduto\"]/div[7]/div/div/button");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div");
+        
+        //Falha. Campo permite letras.
+        assertEquals(
+                "The Estoque field must contain a numeric value.",
+                getTextFromElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p"))
+        );
     }
     
-    @Test
-    @Ignore
+    @Test    
     public void cdu8a3(){
+        access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
+        
+        Map<String, String> columns = getProductInfo(row);
+        
+        click(row+"/td[5]/a[2]/i");
+        
+        WebElement back = waitFor("//*[@id=\"formProduto\"]/div[7]/div/div/a");
+        scrollTo(back);
+        back.click();
+        
+        waitFor("//*[@id=\"breadcrumb\"]/a[2]");
+        
+        assertEquals(
+                "https://testesoftwarecanoas.000webhostapp.com/mapos/index.php/produtos",
+                chromeDriver.getCurrentUrl()
+        );
     }
     
     public void login(String email, String password){
@@ -793,12 +856,12 @@ public class WebDriverTests {
         return chromeDriver.findElement(by);
     }
     
-    public String getTextFromElement(String xpath){
-        return find(By.xpath(xpath)).getText();
+    public String getTextFromElement(By by){
+        return find(by).getText();
     }
     
-    public String getAttributeFromElement(String xpath, String attribute){
-        return find(By.xpath(xpath)).getAttribute(attribute);
+    public String getAttributeFromElement(By by, String attribute){
+        return find(by).getAttribute(attribute);
     }
     
     public void addClient(String flux){
