@@ -392,53 +392,147 @@ public class WebDriverTests {
     @Test
     @Ignore
     public void cdu5P(){
+        access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
+        String number = getTextFromElement(row+"/td[1]");
+        
+        click("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        String newName = "José da Silva";
+        
+        WebElement name = find(By.id("nomeCliente"));
+        
+        name.clear();
+        name.sendKeys(newName);
+        
+        WebElement button = find(By.xpath("//*[@id=\"formCliente\"]/div[12]/div/div/button"));
+        scrollTo(button);
+        button.click();
+        
+        WebElement success = waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        assertTrue(success.getText().contains("Cliente editado com sucesso!"));
+        
+        access("//*[@id=\"sidebar\"]/ul/li[2]/a");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        assertEquals(number, getTextFromElement(row+"/td[1]"));
+        assertEquals(newName, getTextFromElement(row+"/td[2]"));
     }
     
     @Test
     @Ignore
     public void cdu5a1(){
+        access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
+        String number = getTextFromElement(row+"/td[1]");
+        
+        click("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        find(By.id("nomeCliente")).clear();
+        
+        WebElement button = find(By.xpath("//*[@id=\"formCliente\"]/div[12]/div/div/button"));        
+        scrollTo(button);
+        button.click();
+        
+        assertEquals("Campo Requerido.", getTextFromElement("//*[@id=\"formCliente\"]/div[1]/div/span"));
     }
     
     @Test
     @Ignore
     public void cdu5a2(){
+        access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
+        String number = getTextFromElement(row+"/td[1]");
+        
+        click("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        WebElement email = find(By.id("email"));
+        
+        email.clear();
+        email.sendKeys("ts03.admin.com");
+        
+        WebElement button = find(By.xpath("//*[@id=\"formCliente\"]/div[12]/div/div/button"));        
+        scrollTo(button);
+        button.click();
+        
+        String error = "//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div";
+        
+        waitFor(error);
+        
+        assertTrue(getTextFromElement(error+"/div/p").contains("The Email field must contain a valid email address."));
     }
     
     @Test
     @Ignore
     public void cdu5a3(){
+        access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
+        String number = getTextFromElement(row+"/td[1]");
+        
+        click("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        WebElement cpfcnpj = find(By.id("documento"));
+        cpfcnpj.clear();
+        cpfcnpj.sendKeys("AAAAAAAAAAA");
+        
+        WebElement button = find(By.xpath("//*[@id=\"formCliente\"]/div[12]/div/div/button"));
+        scrollTo(button);
+        button.click();
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div");
+        
+        //Falha. Campo permite letras.
+        assertEquals(
+                "The CPF/CNPJ field must contain a numeric value.",
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p")
+        );
     }
     
     @Test
     @Ignore
     public void cdu5a4(){
+        access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
+        WebElement form = waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]");
+        click("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]");
+        
+        waitFor("//*[@id=\"formCliente\"]/div[12]/div/div/a");
+        
+        WebElement back = find(By.xpath("//*[@id=\"formCliente\"]/div[12]/div/div/a"));
+        scrollTo(back);
+        back.click();
+        
+        assertEquals(
+                "https://testesoftwarecanoas.000webhostapp.com/mapos/index.php/clientes",
+                chromeDriver.getCurrentUrl()
+        );
     }
     
     @Test
-    @Ignore
     public void cdu6P(){
         access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
     }
     
     @Test
-    @Ignore
     public void cdu6a1(){
         
     }
     
     @Test
-    @Ignore
-    public void cdu6a2(){
-        
-    }
-    
-    @Test
-    @Ignore
     public void cdu6a3(){
         
     }
