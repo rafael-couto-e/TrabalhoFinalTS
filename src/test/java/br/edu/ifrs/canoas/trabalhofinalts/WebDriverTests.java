@@ -73,7 +73,7 @@ public class WebDriverTests {
     public void cdu1a2(){
         login(EMAIL, "1234567");
         
-        WebElement element = waitFor("//*[@id=\"notification\"]/div[2]/h5");
+        WebElement element = waitForVisibility("//*[@id=\"notification\"]/div[2]/h5");
         
         assertEquals(
                 "Os dados de acesso estão incorretos, por favor tente novamente!",
