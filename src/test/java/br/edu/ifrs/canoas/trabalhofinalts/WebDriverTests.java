@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.Assert.*;
 import org.junit.Ignore;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,7 +21,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WebDriverTests {
     private static WebDriver chromeDriver;
     private static WebDriverWait wait;
-    private static final String URL = "https://testesoftwarecanoas.000webhostapp.com/mapos/";
+    private static JavascriptExecutor jse;
+    private static final String URL = "https://testesoftwarecanoas.000webhostapp.com/mapos/index.php/mapos/login";
     private static final String EMAIL = "ts03@admin.com";
     private static final String PASSWORD = "123456";
     
@@ -38,6 +40,7 @@ public class WebDriverTests {
         
         chromeDriver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
         wait = new WebDriverWait(chromeDriver, 30);
+        jse = (JavascriptExecutor) chromeDriver;
     }
     
     @AfterClass
@@ -101,88 +104,86 @@ public class WebDriverTests {
         //Verificando barra superior
         assertEquals(
                 "Minha Conta", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"user-nav\"]/ul/li[1]/a/span")).getText()
+                getTextFromElement("//*[@id=\"user-nav\"]/ul/li[1]/a/span")
         );
         
         assertEquals(
                 "Sair do Sistema", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"user-nav\"]/ul/li[2]/a/span")).getText()
+                getTextFromElement("//*[@id=\"user-nav\"]/ul/li[2]/a/span")
         );
         
-        assertTrue(chromeDriver.findElement(
-                By.xpath("//*[@id=\"user-nav\"]/ul/li[3]/a/span")
-        ).getText().contains("Versão:"));
+        assertTrue(getTextFromElement("//*[@id=\"user-nav\"]/ul/li[3]/a/span").contains("Versão:"));
         
         //Verificando barra lateral
         assertEquals(
                 "Clientes", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[2]/a/span")).getText()
+                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[2]/a/span")
         );
         
         assertEquals(
                 "Produtos", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[3]/a/span")).getText()
+                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[3]/a/span")
         );
         
         assertEquals(
                 "Serviços", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[4]/a/span")).getText()
+                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[4]/a/span")
         );
         
         assertEquals(
                 "Ordens de Serviço", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[5]/a/span")).getText()
+                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[5]/a/span")
         );
         
         assertEquals(
                 "Vendas", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[6]/a/span")).getText()
+                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[6]/a/span")
         );
         
         assertEquals(
                 "Arquivos", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[7]/a/span")).getText()
+                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[7]/a/span")
         );
         
         assertEquals(
                 "Financeiro", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[8]/a/span[1]")).getText()
+                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[8]/a/span[1]")
         );
         
         assertEquals(
                 "Relatórios", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[9]/a/span[1]")).getText()
+                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[9]/a/span[1]")
         );
         
         assertEquals(
                 "Configurações", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"sidebar\"]/ul/li[10]/a/span[1]")).getText()
+                getTextFromElement("//*[@id=\"sidebar\"]/ul/li[10]/a/span[1]")
         );
         
         //Verificação da parte superior central
         assertEquals(
                 "Clientes", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[1]/a")).getText()
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[1]/a")
         );
         
         assertEquals(
                 "Produtos", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[2]/a")).getText()
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[2]/a")
         );
         
         assertEquals(
                 "Serviços", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[3]/a")).getText()
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[3]/a")
         );
         
         assertEquals(
                 "OS", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[4]/a")).getText()
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[4]/a")
         );
         
         assertEquals(
                 "Vendas", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[5]/a")).getText()
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div/ul/li[5]/a")
         );
     }
     
@@ -192,43 +193,41 @@ public class WebDriverTests {
         access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
         assertEquals("Adicionar Cliente",
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/a")).getText()
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/a")
         );
         
         assertEquals("Próxima",
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[2]/ul/li[4]/a")).getText()
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[2]/ul/li[4]/a")
         );
         
-        assertTrue(chromeDriver.findElement(
-                By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table")
-        ) != null);
+        assertTrue(find(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table")) != null);
         
         assertEquals("#", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[1]")).getText()
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[1]")
         );
         
         assertEquals("Nome", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[2]")).getText()
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[2]")
         );
         
         assertEquals("CPF/CNPJ", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[3]")).getText()
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[3]")
         );
         
         assertEquals("Telefone", 
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[4]")).getText()
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[4]")
         );
         
         assertEquals("icon-eye-open",
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[1]/i")).getAttribute("class")
+                getAttributeFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[1]/i", "class")
         );
         
         assertEquals("icon-pencil icon-white",
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]/i")).getAttribute("class")
+                getAttributeFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]/i", "class")
         );
         
         assertEquals("icon-remove icon-white",
-                chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[3]/i")).getAttribute("class")
+                getAttributeFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[3]/i", "class")
         );
     }
     
@@ -237,35 +236,30 @@ public class WebDriverTests {
     public void cdu3a1(){
         access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
-        //Pega a primeira linha da tabela
         String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
         
-        Map<String, String> columns = new HashMap<>();
-        
-        columns.put("nome", chromeDriver.findElement(By.xpath(row+"/td[2]")).getText());
-        columns.put("telefone", chromeDriver.findElement(By.xpath(row+"/td[4]")).getText());
+        Map<String, String> columns = 
+                getInfo(row);
         
         //Clica no botão Visualizar
-        chromeDriver.findElement(
-                By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[1]")
-        ).click();
+        click(row+"/td[5]/a[1]");
         
         waitFor("//*[@id=\"breadcrumb\"]/a[3]");
         
         //Verificando a aba Dados do Cliente
-        WebElement tab = chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div[1]/ul/li[1]/a"));
+        WebElement tab = find(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div[1]/ul/li[1]/a"));
         assertTrue(tab != null);
         
         //Verificando a seção Dados Pessoais
-        WebElement section = chromeDriver.findElement(By.xpath("//*[@id=\"collapse-group\"]/div[1]/div[1]/div/a/h5"));
+        WebElement section = find(By.xpath("//*[@id=\"collapse-group\"]/div[1]/div[1]/div/a/h5"));
         assertTrue(section != null);
         
         assertEquals(columns.get("nome"),
-                chromeDriver.findElement(By.xpath("//*[@id=\"collapseGOne\"]/div/table/tbody/tr[1]/td[2]")).getText()
+                getTextFromElement("//*[@id=\"collapseGOne\"]/div/table/tbody/tr[1]/td[2]")
         );
         
         //Verificando a seção Contatos
-        section = chromeDriver.findElement(By.xpath("//*[@id=\"collapse-group\"]/div[2]/div[1]/div/a/h5"));
+        section = find(By.xpath("//*[@id=\"collapse-group\"]/div[2]/div[1]/div/a/h5"));
         assertTrue(section != null);
         
         section.click();
@@ -273,155 +267,235 @@ public class WebDriverTests {
         waitFor("//*[@id=\"collapseGTwo\"]/div/table/tbody");
         
         assertEquals(columns.get("telefone"),
-                chromeDriver.findElement(By.xpath("//*[@id=\"collapseGTwo\"]/div/table/tbody/tr[1]/td[2]")).getText()
+                getTextFromElement("//*[@id=\"collapseGTwo\"]/div/table/tbody/tr[1]/td[2]")
         );
         
         //Verificando a seção Endereço
-        section = chromeDriver.findElement(By.xpath("//*[@id=\"collapse-group\"]/div[3]/div[1]/div/a/h5"));
+        section = find(By.xpath("//*[@id=\"collapse-group\"]/div[3]/div[1]/div/a/h5"));
         assertTrue(section != null);
         
-        assertTrue(chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div[1]/ul/div/a")) != null);
+        assertTrue(find(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div[1]/ul/div/a")) != null);
         
         //Verificando a aba Ordens de Serviço
-        tab = chromeDriver.findElement(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div[1]/ul/li[2]/a"));
+        tab = find(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div[1]/ul/li[2]/a"));
         assertTrue(tab != null);
         
         tab.click();
         
-        waitFor("//*[@id=\"tab2\"]/table");
+        WebElement table = waitFor("//*[@id=\"tab2\"]/table");
         
-        assertTrue(chromeDriver.findElement(By.xpath("//*[@id=\"tab2\"]/table")) != null);
+        assertTrue(table != null);
         
-        assertTrue(chromeDriver.findElement(
-                By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div[1]/ul/div/a")
-        ) != null);
+        assertTrue(find(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div/div[1]/ul/div/a")) != null);
     }
     
     @Test
-    public void cdu3a2(){
-        
-    }
-    
-    @Test
+    @Ignore
     public void cdu3a3(){
+        access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
+        
+        Map<String, String> deletedColumns = getInfo(row);
+        
+        click(row+"/td[5]/a[3]");
+        
+        waitFor("//*[@id=\"modal-excluir\"]/form");
+        
+        WebElement delete = waitForVisibility("//*[@id=\"modal-excluir\"]/form/div[3]/button[2]");
+        
+        delete.click();
+        
+        waitFor("//*[@id=\"breadcrumb\"]/a[3]");
+        
+        assertTrue(getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]").contains("Cliente excluido com sucesso!"));
+        
+        row = "//*[@id=\"content\"]/div[2]/div/div/div[2]/div[2]/table/tbody/tr[1]";
+        
+        Map<String, String> columns = getInfo(row);
+        
+        assertNotEquals(deletedColumns.get("nome"), columns.get("nome"));
+        assertNotEquals(deletedColumns.get("telefone"), columns.get("telefone"));
     }
     
     @Test
+    @Ignore
     public void cdu4P(){
+        addClient("p");
         
+        WebElement success = waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        assertTrue(success.getText().contains("Cliente adicionado com sucesso!"));
     }
     
     @Test
+    @Ignore
     public void cdu4a1(){
+        addClient("a1");
         
+        waitFor("//*[@id=\"formCliente\"]/div[5]/div/span");
+        
+        assertEquals(
+                "Campo Requerido.",
+                getTextFromElement("//*[@id=\"formCliente\"]/div[5]/div/span")
+        );
     }
     
     @Test
+    @Ignore
     public void cdu4a2(){
+        addClient("a2");
         
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div");
+        
+        assertEquals(
+                "The Email field must contain a valid email address.",
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p")
+        );
     }
     
     @Test
+    @Ignore
     public void cdu4a3(){
+        addClient("a3");
         
+        waitFor("//*[@id=\"breadcrumb\"]/a[3]");
+        
+        //Falha. Campo permite letras.
+        assertEquals(
+                "The CPF/CNPJ field must contain a numeric value.",
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p")
+        );
     }
     
     @Test
+    @Ignore
     public void cdu4a4(){
+        access("//*[@id=\"sidebar\"]/ul/li[2]/a");
         
+        click("//*[@id=\"content\"]/div[2]/div/div/a");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        WebElement back = waitToBeClickable("//*[@id=\"formCliente\"]/div[12]/div/div/a");
+        
+        scrollTo(back);
+        
+        back.click();
+        
+        assertEquals(
+                "https://testesoftwarecanoas.000webhostapp.com/mapos/index.php/clientes",
+                chromeDriver.getCurrentUrl()
+        );
     }
     
     @Test
+    @Ignore
     public void cdu5P(){
         
     }
     
     @Test
+    @Ignore
     public void cdu5a1(){
         
     }
     
     @Test
+    @Ignore
     public void cdu5a2(){
         
     }
     
     @Test
+    @Ignore
     public void cdu5a3(){
         
     }
     
     @Test
+    @Ignore
     public void cdu5a4(){
         
     }
     
     @Test
+    @Ignore
     public void cdu6P(){
         access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
     }
     
     @Test
+    @Ignore
     public void cdu6a1(){
         
     }
     
     @Test
+    @Ignore
     public void cdu6a2(){
         
     }
     
     @Test
+    @Ignore
     public void cdu6a3(){
         
     }
     
     @Test
+    @Ignore
     public void cdu7P(){
         
     }
     
     @Test
+    @Ignore
     public void cdu7a1(){
         
     }
     
     @Test
+    @Ignore
     public void cdu7a2(){
         
     }
     
     @Test
+    @Ignore
     public void cdu7a3(){
         
     }
     
     @Test
+    @Ignore
     public void cdu8P(){
         
     }
     
     @Test
+    @Ignore
     public void cdu8a1(){
         
     }
     
     @Test
+    @Ignore
     public void cdu8a2(){
         
     }
     
     @Test
+    @Ignore
     public void cdu8a3(){
         
     }
     
     public void login(String email, String password){
         chromeDriver.get(URL);
-        chromeDriver.findElement(By.name("email")).sendKeys(email);
-        chromeDriver.findElement(By.name("senha")).sendKeys(password);
-        chromeDriver.findElement(By.id("btn-acessar")).click();
+        find(By.name("email")).sendKeys(email);
+        find(By.name("senha")).sendKeys(password);
+        find(By.id("btn-acessar")).click();
     }
     
     public WebElement waitFor(String xpath){
@@ -435,8 +509,85 @@ public class WebDriverTests {
         
         waitFor("//*[@id=\"breadcrumb\"]/a[1]");
         
-        chromeDriver.findElement(By.xpath(xpath)).click();
+        click(xpath);
         
         waitFor("//*[@id=\"breadcrumb\"]/a[2]");
+    }
+    
+    public Map<String, String> getInfo(String row){
+        Map<String, String> columns = new HashMap<>();
+        
+        columns.put("nome", find(By.xpath(row+"/td[2]")).getText());
+        columns.put("telefone", find(By.xpath(row+"/td[4]")).getText());
+        
+        return columns;
+    }
+    
+    public void click(String xpath){
+        find(By.xpath(xpath)).click();
+    }
+    
+    public WebElement find(By by){
+        return chromeDriver.findElement(by);
+    }
+    
+    public String getTextFromElement(String xpath){
+        return find(By.xpath(xpath)).getText();
+    }
+    
+    public String getAttributeFromElement(String xpath, String attribute){
+        return find(By.xpath(xpath)).getAttribute(attribute);
+    }
+    
+    public void addClient(String flux){
+        access("//*[@id=\"sidebar\"]/ul/li[2]/a");
+        
+        click("//*[@id=\"content\"]/div[2]/div/div/a");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        find(By.id("nomeCliente")).sendKeys("Rafael Couto Estrela");
+        find(By.id("documento")).sendKeys("03720498000");
+        find(By.id("telefone")).sendKeys("5137855297");
+        find(By.id("celular")).sendKeys("51992152754");
+        find(By.id("rua")).sendKeys("Fernão de Magalhães");
+        find(By.id("numero")).sendKeys("235");
+        find(By.id("bairro")).sendKeys("Harmonia");
+        find(By.id("cidade")).sendKeys("Canoas");
+        find(By.id("estado")).sendKeys("RS");
+        find(By.id("cep")).sendKeys("92310450");
+        
+        switch(flux){
+            case "p":
+                find(By.id("email")).sendKeys("rcouto97@gmail.com");
+                break;
+            case "a2":
+                find(By.id("email")).sendKeys("teste.admin.com");
+                break;
+            case "a3":
+                WebElement cpfcnpj = find(By.id("documento"));
+                cpfcnpj.clear();
+                cpfcnpj.sendKeys("AAAAAAAAAAA");
+                find(By.id("email")).sendKeys("rcouto97@gmail.com");
+                break;
+        }
+        
+        WebElement button = waitToBeClickable("//*[@id=\"formCliente\"]/div[12]/div/div/button");
+        
+        button.click();
+    }
+
+    private WebElement waitForVisibility(String xpath) {
+        return wait.until(ExpectedConditions.visibilityOf(
+                find(By.xpath(xpath))
+        ));
+    }
+    
+    private WebElement waitToBeClickable(String xpath){
+        return wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+    }
+
+    private void scrollTo(WebElement element) {
+        jse.executeScript("arguments[0].scrollIntoView()", element);
     }
 }
