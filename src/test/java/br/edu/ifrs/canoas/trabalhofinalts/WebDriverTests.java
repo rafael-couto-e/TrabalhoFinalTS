@@ -624,25 +624,97 @@ public class WebDriverTests {
     @Test
     @Ignore
     public void cdu7P(){
+        access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        click("//*[@id=\"content\"]/div[2]/div/div/a");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        find(By.id("descricao")).sendKeys("Produto Cadastrado 1");
+        find(By.id("unidade")).sendKeys("kg");
+        find(By.id("precoCompra")).sendKeys("80.00");
+        find(By.id("precoVenda")).sendKeys("100.00");
+        find(By.id("estoque")).sendKeys("100");
+        find(By.id("estoqueMinimo")).sendKeys("20");
+        
+        click("//*[@id=\"formProduto\"]/div[7]/div/div/button");
+        
+        WebElement success = waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        assertTrue(success.getText().contains("Produto adicionado com sucesso!"));
     }
     
     @Test
     @Ignore
     public void cdu7a1(){
+        access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        click("//*[@id=\"content\"]/div[2]/div/div/a");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        find(By.id("descricao")).sendKeys("Produto Cadastrado 1");
+        find(By.id("unidade")).sendKeys("kg");
+        find(By.id("precoCompra")).sendKeys("80.00");
+        find(By.id("estoque")).sendKeys("100");
+        
+        click("//*[@id=\"formProduto\"]/div[7]/div/div/button");
+        
+        WebElement error = waitFor("//*[@id=\"formProduto\"]/div[4]/div/span");
+        
+        assertEquals("Campo Requerido.", error.getText());
     }
     
     @Test
     @Ignore
     public void cdu7a2(){
+        access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        click("//*[@id=\"content\"]/div[2]/div/div/a");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div");
+        
+        find(By.id("descricao")).sendKeys("Produto Cadastrado 1");
+        find(By.id("unidade")).sendKeys("kg");
+        find(By.id("precoCompra")).sendKeys("80.00");
+        find(By.id("precoVenda")).sendKeys("2500.00");
+        find(By.id("estoque")).sendKeys("AAA");
+        
+        click("//*[@id=\"formProduto\"]/div[7]/div/div/button");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div");
+        
+        //Falha. Campo permite letras.
+        assertEquals(
+                "The Estoque field must contain a numeric value.",
+                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div/div/div/div[2]/div/div/p")
+        );
     }
     
     @Test
     @Ignore
     public void cdu7a3(){
+        access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        click("//*[@id=\"content\"]/div[2]/div/div/a");
+        
+        WebElement back = waitFor("//*[@id=\"formProduto\"]/div[7]/div/div/a");
+        scrollTo(back);
+        back.click();
+        
+        waitFor("//*[@id=\"breadcrumb\"]/a[2]");
+        
+        assertEquals(
+                "https://testesoftwarecanoas.000webhostapp.com/mapos/index.php/produtos",
+                chromeDriver.getCurrentUrl()
+        );
     }
     
     @Test
