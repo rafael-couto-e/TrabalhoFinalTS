@@ -202,32 +202,36 @@ public class WebDriverTests {
         
         assertTrue(find(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table")) != null);
         
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr";
+        
         assertEquals("#", 
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[1]")
+                getTextFromElement(row+"/th[1]")
         );
         
         assertEquals("Nome", 
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[2]")
+                getTextFromElement(row+"/th[2]")
         );
         
         assertEquals("CPF/CNPJ", 
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[3]")
+                getTextFromElement(row+"/th[3]")
         );
         
         assertEquals("Telefone", 
-                getTextFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr/th[4]")
+                getTextFromElement(row+"/th[4]")
         );
         
+        row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]";
+        
         assertEquals("icon-eye-open",
-                getAttributeFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[1]/i", "class")
+                getAttributeFromElement(row+"/a[1]/i", "class")
         );
         
         assertEquals("icon-pencil icon-white",
-                getAttributeFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[2]/i", "class")
+                getAttributeFromElement(row+"/a[2]/i", "class")
         );
         
         assertEquals("icon-remove icon-white",
-                getAttributeFromElement("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[3]/i", "class")
+                getAttributeFromElement(row+"/a[3]/i", "class")
         );
     }
     
@@ -239,7 +243,7 @@ public class WebDriverTests {
         String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
         
         Map<String, String> columns = 
-                getInfo(row);
+                getClientInfo(row);
         
         //Clica no botão Visualizar
         click(row+"/td[5]/a[1]");
@@ -296,7 +300,7 @@ public class WebDriverTests {
         
         String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
         
-        Map<String, String> deletedColumns = getInfo(row);
+        Map<String, String> deletedColumns = getClientInfo(row);
         
         click(row+"/td[5]/a[3]");
         
@@ -312,10 +316,9 @@ public class WebDriverTests {
         
         row = "//*[@id=\"content\"]/div[2]/div/div/div[2]/div[2]/table/tbody/tr[1]";
         
-        Map<String, String> columns = getInfo(row);
+        Map<String, String> columns = getClientInfo(row);
         
-        assertNotEquals(deletedColumns.get("nome"), columns.get("nome"));
-        assertNotEquals(deletedColumns.get("telefone"), columns.get("telefone"));
+        assertNotEquals(deletedColumns.get("numero"), columns.get("numero"));
     }
     
     @Test
@@ -523,18 +526,99 @@ public class WebDriverTests {
     }
     
     @Test
+    @Ignore
     public void cdu6P(){
         access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
+        
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        assertTrue(find(By.xpath("//*[@id=\"content\"]/div[2]/div/div/a")) != null);
+        assertTrue(find(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[2]/ul/li[4]/a")) != null);
+        assertTrue(find(By.xpath("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table")) != null);
+        
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/thead/tr";
+        
+        assertEquals("Nome", getTextFromElement(row+"/th[2]"));
+        assertEquals("Estoque", getTextFromElement(row+"/th[3]"));
+        assertEquals("Preço", getTextFromElement(row+"/th[4]"));
+        
+        row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]";
+        
+        assertEquals("icon-eye-open",
+                getAttributeFromElement(row+"/a[1]/i", "class")
+        );
+        
+        assertEquals("icon-pencil icon-white",
+                getAttributeFromElement(row+"/a[2]/i", "class")
+        );
+        
+        assertEquals("icon-remove icon-white",
+                getAttributeFromElement(row+"/a[3]/i", "class")
+        );
     }
     
     @Test
+    @Ignore
     public void cdu6a1(){
+        access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        Map<String, String> columns = getProductInfo("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]");
+        
+        click("//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]/td[5]/a[1]");
+        
+        waitFor("//*[@id=\"collapse-group\"]/div");
+        
+        String table = "//*[@id=\"collapse-group\"]/div/div[2]/div/table/tbody";
+        
+        assertEquals("Descrição", getTextFromElement(table+"/tr[1]/td[1]"));
+        assertEquals(columns.get("nome"), getTextFromElement(table+"/tr[1]/td[2]"));
+        assertEquals("Unidade", getTextFromElement(table+"/tr[2]/td[1]"));        
+        assertEquals("Preço de Compra", getTextFromElement(table+"/tr[3]/td[1]"));
+        assertEquals("Preço de Venda", getTextFromElement(table+"/tr[4]/td[1]"));
+        assertTrue(getTextFromElement(table+"/tr[4]/td[2]").contains(columns.get("preco")));
+        assertEquals("Estoque", getTextFromElement(table+"/tr[5]/td[1]"));
+        assertEquals(columns.get("estoque"), getTextFromElement(table+"/tr[5]/td[2]"));
+        assertEquals("Estoque Mínimo", getTextFromElement(table+"/tr[6]/td[1]"));
+        
+        //Não vai passar, botão "voltar" não existe.
+        WebElement back = find(By.xpath("//*[@id=\"collapse-group\"]/div/div[12]/div/div/a"));
+        scrollTo(back);
+        back.click();
+        
+        assertEquals(
+                "https://testesoftwarecanoas.000webhostapp.com/mapos/index.php/produtos",
+                chromeDriver.getCurrentUrl()
+        );
     }
     
     @Test
+    @Ignore
     public void cdu6a3(){
+        access("//*[@id=\"sidebar\"]/ul/li[3]/a/span");
         
+        waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        String row = "//*[@id=\"content\"]/div[2]/div/div/div[1]/div[2]/table/tbody/tr[1]";
+        
+        Map<String, String> columns = getProductInfo(row);
+        
+        click(row+"/td[5]/a[3]");
+        
+        WebElement button = waitForVisibility("//*[@id=\"modal-excluir\"]/form/div[3]/button[2]");
+        
+        button.click();
+        
+        WebElement success = waitFor("//*[@id=\"content\"]/div[2]/div/div/div[1]");
+        
+        assertTrue(success.getText().contains("Produto excluido com sucesso!"));
+        
+        row = "//*[@id=\"content\"]/div[2]/div/div/div[2]/div[2]/table/tbody/tr[1]";
+        
+        Map<String, String> newColumns = getProductInfo(row);
+        
+        assertNotEquals(newColumns.get("numero"), columns.get("numero"));
     }
     
     @Test
@@ -608,11 +692,23 @@ public class WebDriverTests {
         waitFor("//*[@id=\"breadcrumb\"]/a[2]");
     }
     
-    public Map<String, String> getInfo(String row){
+    public Map<String, String> getClientInfo(String row){
         Map<String, String> columns = new HashMap<>();
         
+        columns.put("numero", find(By.xpath(row+"/td[1]")).getText());
         columns.put("nome", find(By.xpath(row+"/td[2]")).getText());
         columns.put("telefone", find(By.xpath(row+"/td[4]")).getText());
+        
+        return columns;
+    }
+    
+    public Map<String, String> getProductInfo(String row){
+        Map<String, String> columns = new HashMap<>();
+        
+        columns.put("numero", find(By.xpath(row+"/td[1]")).getText());
+        columns.put("nome", find(By.xpath(row+"/td[2]")).getText());
+        columns.put("estoque", find(By.xpath(row+"/td[3]")).getText());
+        columns.put("preco", find(By.xpath(row+"/td[4]")).getText().replace(".", "").replace(",", "."));
         
         return columns;
     }
